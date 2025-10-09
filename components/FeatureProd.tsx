@@ -69,7 +69,7 @@ const FeatureProd = () => {
 
     return (
         <section className="w-full py-10 flex justify-center px-4 sm:px-6 md:px-8 mt-20 overflow-hidden">
-            <div className="max-w-7xl w-full bg-[#9CA3AF19] shadow-lg rounded-lg relative min-h-[420px] md:h-[440px] overflow-hidden">
+            <div className="max-w-7xl w-full bg-[#282C30] shadow-lg rounded-lg relative min-h-[420px] md:h-[440px] overflow-hidden">
 
                 <div
                     className="flex transition-transform duration-700 ease-in-out"

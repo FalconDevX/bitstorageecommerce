@@ -10,15 +10,12 @@ const Header = () => {
         
         <div className="w-1/3 flex items-center gap-3 flex-shrink-0 transition-all duration-300">
           <Image
-            src="/bitstorage-logo.png"
+            src="/logo.png"
             alt="BitStorage"
-            width={60}
-            height={60}
+            width={180}
+            height={180}
             className="rounded-md"
           />
-          <span className="text-white font-light text-3xl tracking-wide hidden md:block">
-            BitStorage
-          </span>
         </div>
 
         <nav className="w-1/3 flex justify-center flex-grow gap-8 text-[#9CA3AF] font-light">
