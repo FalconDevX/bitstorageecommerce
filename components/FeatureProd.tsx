@@ -68,7 +68,7 @@ const FeatureProd = () => {
     }, [isPageVisible])
 
     return (
-        <div className="py-10 flex justify-center px-12 sm:px-16 md:px-24 mt-20 overflow-y-auto flex-col">
+        <div className="py-10 flex justify-center px-12 sm:px-16 md:px-24 overflow-y-auto flex-col">
             <div className="w-full w-full bg-[#282C30] shadow-lg rounded-lg relative min-h-[420px] md:h-[440px] overflow-hidden">
 
                 <div
