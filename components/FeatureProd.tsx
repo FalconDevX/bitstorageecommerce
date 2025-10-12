@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { ChevronRightIcon } from "lucide-react"
@@ -41,16 +41,16 @@ const FeatureProd = () => {
         },
     ]
 
-    const nextProduct = () => {
+    const nextProduct = useCallback(() => {
         if (isSliding) return
         setIsSliding(true)
         setTimeout(() => {
             setCurrentSlideIndex((prev) => (prev + 1) % featureProducts.length)
             setIsSliding(false)
         }, 500)
-    }
+    }, [isSliding, featureProducts.length])
 
-    useEffect(()=>{
+    useEffect(() => {
         const handleVisibilityChange = () => {
             setIsPageVisible(!document.hidden)
         }
@@ -59,7 +59,7 @@ const FeatureProd = () => {
         return () => {
             document.removeEventListener("visibilitychange", handleVisibilityChange)
         }
-    })
+    }, [])
 
     useEffect(() => {
         if (!isPageVisible) return
@@ -68,8 +68,8 @@ const FeatureProd = () => {
     }, [isPageVisible])
 
     return (
-        <section className="w-full py-10 flex justify-center px-4 sm:px-6 md:px-8 mt-20 overflow-hidden">
-            <div className="max-w-7xl w-full bg-[#282C30] shadow-lg rounded-lg relative min-h-[420px] md:h-[440px] overflow-hidden">
+        <div className="py-10 flex justify-center px-12 sm:px-16 md:px-24 mt-20 overflow-y-auto flex-col">
+            <div className="w-full w-full bg-[#282C30] shadow-lg rounded-lg relative min-h-[420px] md:h-[440px] overflow-hidden">
 
                 <div
                     className="flex transition-transform duration-700 ease-in-out"
@@ -96,8 +96,6 @@ const FeatureProd = () => {
                                         {product.secondaryButton}
                                         <ChevronRightIcon className="w-5 h-5" />
                                     </button>
-
-
                                 </div>
                             </div>
 
@@ -131,8 +129,25 @@ const FeatureProd = () => {
                         ></div>
                     ))}
                 </div>
+
             </div>
-        </section>
+
+            <div className="w-full mt-10 h-auto bg-[#1e2227] flex items-center justify-center p-6 py-10 px-10">
+                <div className="grid grid-cols-6 gap-6 w-full w-full">
+                    {Array.from({ length: 18 }).map((_, index) => (
+                        <div
+                            key={index}
+                            className="bg-[#2b2f34] rounded-xl aspect-square w-full relative shadow-inner border border-black/30"
+                        >
+                            <span className="absolute top-2 left-2 bg-black/60 text-white text-sm px-2 py-1 rounded-md">
+                                {index + 1}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+        </div>
     )
 }
 

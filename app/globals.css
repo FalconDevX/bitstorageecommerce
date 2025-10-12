@@ -19,8 +19,30 @@
   }
 }
 
-body {
+/* --- Reset i stabilizacja scrolla --- */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: auto; /* scroll zawsze widoczny */
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter);
 }
+
+/* --- Scroll pojawia się tylko przy małej wysokości --- */
+@media (max-height: 700px) {
+  html, body {
+    overflow-y: auto !important;
+  }
+
+  .show-scroll-bar-when-short {
+    overflow-y: auto !important;
+  }
+
+  .hide-when-short {
+    display: none !important;
+  }
+}
+
+/* Scroll zawsze dostępny */
