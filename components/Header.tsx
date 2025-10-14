@@ -17,7 +17,7 @@ const Header = () => {
       <div className="w-full md:flex-start h-20 flex justify-between items-center px-12 sm:px-16 md:px-24">
         <div className="w-1/3 hidden md:flex items-center gap-3 flex-shrink-0 transition-all duration-300">
           <Image
-            src="/logo.png"
+            src="/renderx-logo.png"
             alt="BitStorage"
             width={180}
             height={180}

@@ -5,6 +5,37 @@ import { motion } from "framer-motion"
 import { ChevronRightIcon, Star } from "lucide-react"
 import Search from "./Search"
 
+const featureProducts = [
+    {
+        title: "Experience Next-Level Graphics – Power Meets Precision!",
+        subtitle: "Limited Time Offer 40% Off",
+        image: "/graphic-card.png",
+        primaryButton: "Buy Now",
+        secondaryButton: "Explore Deals",
+    },
+    {
+        title: "Crystal Clear Audio – Hear Every Detail!",
+        subtitle: "Exclusive Launch Discount 30% Off",
+        image: "/graphic-card2.png",
+        primaryButton: "Shop Now",
+        secondaryButton: "Learn More",
+    },
+    {
+        title: "Ultra-Fast SSDs – Performance You Deserve!",
+        subtitle: "Special Offer for a Limited Time",
+        image: "/graphic-card3.png",
+        primaryButton: "Buy SSD",
+        secondaryButton: "View Specs",
+    },
+    {
+        title: "Ultra-Fast SSDs – Performance You Deserve!",
+        subtitle: "Special Offer for a Limited Time",
+        image: "/graphic-card4.png",
+        primaryButton: "Buy SSD",
+        secondaryButton: "View Specs",
+    },
+]
+
 const FeatureProd = () => {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
     const [isSliding, setIsSliding] = useState(false)
@@ -55,36 +86,7 @@ const FeatureProd = () => {
         }
     ]
 
-    const featureProducts = [
-        {
-            title: "Experience Next-Level Graphics – Power Meets Precision!",
-            subtitle: "Limited Time Offer 40% Off",
-            image: "/graphic-card.png",
-            primaryButton: "Buy Now",
-            secondaryButton: "Explore Deals",
-        },
-        {
-            title: "Crystal Clear Audio – Hear Every Detail!",
-            subtitle: "Exclusive Launch Discount 30% Off",
-            image: "/graphic-card2.png",
-            primaryButton: "Shop Now",
-            secondaryButton: "Learn More",
-        },
-        {
-            title: "Ultra-Fast SSDs – Performance You Deserve!",
-            subtitle: "Special Offer for a Limited Time",
-            image: "/graphic-card3.png",
-            primaryButton: "Buy SSD",
-            secondaryButton: "View Specs",
-        },
-        {
-            title: "Ultra-Fast SSDs – Performance You Deserve!",
-            subtitle: "Special Offer for a Limited Time",
-            image: "/graphic-card4.png",
-            primaryButton: "Buy SSD",
-            secondaryButton: "View Specs",
-        },
-    ]
+    
 
     const renderStars = (rating: number) => {
         const rounded = Math.round(rating * 2) / 2
@@ -141,7 +143,7 @@ const FeatureProd = () => {
         if (!isPageVisible) return
         const interval = setInterval(nextProduct, 5000)
         return () => clearInterval(interval)
-    }, [isPageVisible])
+    }, [isPageVisible, nextProduct])
 
     return (
         
