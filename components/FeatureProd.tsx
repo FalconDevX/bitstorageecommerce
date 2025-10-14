@@ -126,7 +126,7 @@ const FeatureProd = () => {
             setCurrentSlideIndex((prev) => (prev + 1) % featureProducts.length)
             setIsSliding(false)
         }, 500)
-    }, [isSliding, featureProducts.length])
+    }, [isSliding])
 
     useEffect(() => {
         const handleVisibilityChange = () => {
