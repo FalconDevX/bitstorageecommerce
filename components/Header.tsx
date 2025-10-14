@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { User } from 'lucide-react'
+import { User, LogIn, EditIcon } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -14,8 +14,8 @@ const Header = () => {
 
   return (
     <header className="w-full sticky top-0 z-50 bg-[#16181C] backdrop-blur-md border-b border-white/10">
-      <div className="max-w-[1320px] mx-auto h-20 flex justify-between items-center px-2 sm:px-4 md:px-6">
-        <div className="w-1/3 hidden sm:flex items-center gap-3 flex-shrink-0 transition-all duration-300">
+      <div className="w-full md:flex-start h-20 flex justify-between items-center px-12 sm:px-16 md:px-24">
+        <div className="w-1/3 hidden md:flex items-center gap-3 flex-shrink-0 transition-all duration-300">
           <Image
             src="/logo.png"
             alt="BitStorage"
@@ -42,8 +42,12 @@ const Header = () => {
 
           {isUserPanelOpen && (
             <div className="absolute right-0 top-10 w-40 bg-[#1E2025] rounded-md shadow-lg transition-all duration-300 overflow-hidden flex flex-col items-center">
-              <p className="text-white px-4 py-2 hover:bg-white/10 cursor-pointer w-full text-center" onClick={() => router.push('/login')}>Logowanie</p>
-              <p className="text-white px-4 py-2 hover:bg-white/10 cursor-pointer w-full text-center">Rejestracja</p>
+              <p className="flex items-center justify-center gap-2 text-white px-4 py-2 hover:bg-white/10 cursor-pointer w-full text-center border-b border-gray-500" onClick={() => router.push('/login')}>
+                <LogIn className='w-5 h-5'/> Login
+              </p>
+              <p className="flex items-center justify-center gap-2 text-white px-4 py-2 hover:bg-white/10 cursor-pointer w-full text-center">
+                <EditIcon className='w-5 h-5 '/> Register
+              </p>
             </div>
           )}
         </div>

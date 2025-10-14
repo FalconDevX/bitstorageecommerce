@@ -2,13 +2,58 @@
 import React, { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ChevronRightIcon } from "lucide-react"
-
+import { ChevronRightIcon, Star } from "lucide-react"
+import Search from "./Search"
 
 const FeatureProd = () => {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
     const [isSliding, setIsSliding] = useState(false)
     const [isPageVisible, setIsPageVisible] = useState(true)
+
+    const products = [
+        {
+            title: "GeForce RTX 3060",
+            description: "Next-gen graphics card delivering exceptional gaming performance.",
+            price: "$299.99",
+            image: "/feature_cards/GeForce-RTX-3060.jpg",
+            rating: 4.5,
+        },
+        {
+            title: "GeForce RTX 5070",
+            description: "Experience unmatched speed and efficiency for modern gaming.",
+            price: "$449.99",
+            image: "/feature_cards/GeForce-RTX-5070.jpg",
+            rating: 4.5,
+        },
+        {
+            title: "Radeon RX 9060XT",
+            description: "High-end performance with cutting-edge RDNA architecture.",
+            price: "$499.99",
+            image: "/feature_cards/Radeon-RX-9060XT.jpg",
+            rating: 4.5,
+        },
+        {
+            title: "RX 7800 XT",
+            description: "Powerful GPU for immersive 4K gaming and rendering tasks.",
+            price: "$399.99",
+            image: "/feature_cards/RX-7800-XT.jpeg",
+            rating: 3.8,
+        },
+        {
+            title: "GeForce-RTX-3050",
+            description: "Powerful GPU for immersive 4K gaming and rendering tasks.",
+            price: "$399.99",
+            image: "/feature_cards/GeForce-RTX-3050.jpg",
+            rating: 4.5,
+        },
+        {
+            title: "GeForce-RTX-3050",
+            description: "Powerful GPU for immersive 4K gaming and rendering tasks.",
+            price: "$399.99",
+            image: "/feature_cards/GeForce-RTX-3050.jpg",
+            rating: 4.5,
+        }
+    ]
 
     const featureProducts = [
         {
@@ -41,6 +86,37 @@ const FeatureProd = () => {
         },
     ]
 
+    const renderStars = (rating: number) => {
+        const rounded = Math.round(rating * 2) / 2
+        const stars = []
+
+        for (let i = 1; i <= 5; i++) {
+            if (rounded >= i) {
+                stars.push(
+                    <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                )
+            } else if (rounded + 0.5 === i) {
+                stars.push(
+                    <div
+                        key={i}
+                        className="relative w-4 h-4"
+                    >
+                        <Star className="absolute inset-0 w-4 h-4 text-gray-400" />
+                        <div className="absolute inset-0 w-1/2 overflow-hidden">
+                            <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
+                        </div>
+                    </div>
+                )
+            } else {
+                stars.push(
+                    <Star key={i} className="w-4 h-4 text-gray-400" />
+                )
+            }
+        }
+
+        return stars
+    }
+
     const nextProduct = useCallback(() => {
         if (isSliding) return
         setIsSliding(true)
@@ -68,9 +144,10 @@ const FeatureProd = () => {
     }, [isPageVisible])
 
     return (
-        <div className="py-10 flex justify-center px-12 sm:px-16 md:px-24 overflow-y-auto flex-col">
-            <div className="w-full w-full bg-[#282C30] shadow-lg rounded-lg relative min-h-[420px] md:h-[440px] overflow-hidden">
-
+        
+        <div className="flex justify-center px-12 sm:px-16 md:px-24 overflow-y-auto flex-col">
+            <Search />
+            <div className="w-full bg-[#282C30] shadow-lg rounded-lg relative min-h-[420px] md:h-[440px] overflow-hidden">
                 <div
                     className="flex transition-transform duration-700 ease-in-out"
                     style={{
@@ -80,8 +157,7 @@ const FeatureProd = () => {
                     {featureProducts.map((product, index) => (
                         <div
                             key={index}
-                            style={{ transformStyle: "preserve-3d", transformOrigin: "center center", transition: "rotateY(-30deg) rotateX(30deg)" }}
-                            className="perspective-[1000px] min-w-full flex flex-col md:flex-row justify-between items-center px-6 sm:px-10 md:px-12 py-10"
+                            className="min-w-full flex flex-col md:flex-row justify-between items-center px-6 sm:px-10 md:px-12 py-10"
                         >
                             <div className="flex flex-col gap-4 max-w-lg">
                                 <h3 className="text-orange-500">{product.subtitle}</h3>
@@ -102,9 +178,14 @@ const FeatureProd = () => {
                             <motion.div
                                 initial={{ transform: "translateZ(-10px) translateY(20px)" }}
                                 animate={{ transform: "translateZ(30px) translateY(-20px)" }}
-                                transition={{ repeat: Infinity, repeatType: "mirror", duration: 2, ease: "easeInOut" }}
-                                className="relative w-[280px] h-[380px] min-w-[220px] min-h-[260px]">
-
+                                transition={{
+                                    repeat: Infinity,
+                                    repeatType: "mirror",
+                                    duration: 2,
+                                    ease: "easeInOut",
+                                }}
+                                className="relative w-[280px] h-[380px] min-w-[220px] min-h-[260px]"
+                            >
                                 <Image
                                     src={product.image}
                                     alt={product.title}
@@ -116,9 +197,7 @@ const FeatureProd = () => {
                     ))}
                 </div>
 
-                <div
-
-                    className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-3">
+                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-3">
                     {featureProducts.map((_, index) => (
                         <div
                             key={index}
@@ -129,19 +208,51 @@ const FeatureProd = () => {
                         ></div>
                     ))}
                 </div>
-
+            </div>
+            
+            <div className="w-fit mx-auto text-center pt-4 pb-4">
+                <h1 className="text-white text-2xl font-semibold pb-2">
+                    Our Best Products
+                </h1>
+                <div className="h-[3px] w-30 bg-gradient-to-r from-orange-500 to-amber-300 rounded-full mx-auto"></div>
             </div>
 
-            <div className="w-full mt-10 h-auto bg-[#1e2227] flex items-center justify-center p-6 py-10 px-10">
-                <div className="grid grid-cols-6 gap-6 w-full w-full">
-                    {Array.from({ length: 18 }).map((_, index) => (
+            <div className="w-full h-auto bg-[#1e2227] flex items-center justify-center p-6 py-5 px-5">
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] auto-cols-fr gap-6 w-full">
+                    {products.map((product, index) => (
                         <div
                             key={index}
-                            className="bg-[#2b2f34] rounded-xl aspect-square w-full relative shadow-inner border border-black/30"
+                            className="bg-[#2b2f34] rounded-xl shadow-md border border-black/30 overflow-hidden hover:scale-105 transition-transform duration-300 cursor-pointer"
                         >
-                            <span className="absolute top-2 left-2 bg-black/60 text-white text-sm px-2 py-1 rounded-md">
-                                {index + 1}
-                            </span>
+                            <div className="relative w-full aspect-[1/1] flex items-center justify-center bg-white">
+                                <Image
+                                    src={product.image}
+                                    alt={product.title}
+                                    fill
+                                    className="object-contain p-6"
+                                />
+                            </div>
+
+                            <div className="p-4 flex flex-col gap-1">
+                                <h3 className="text-white text-lg font-semibold">
+                                    {product.title}
+                                </h3>
+                                <p className="text-gray-300 text-sm line-clamp-2">
+                                    {product.description}
+                                </p>
+                                <div className="flex flex-col justify-between items-start gap-2 mt-2">
+                                    <p className="text-white font-bold text-xl leading-none">
+                                        {product.price}
+                                    </p>
+                                    <div className="flex flex-row gap-1.5 translate-y-[1px]">
+                                        {renderStars(product.rating)}
+                                        <p className="text-gray-300 text-sm leading-none">{product.rating}</p>
+                                    </div>
+                                </div>
+                                <button className="mt-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-2 rounded-md font-medium hover:scale-105 transition-transform cursor-pointer">
+                                    Buy now
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>
