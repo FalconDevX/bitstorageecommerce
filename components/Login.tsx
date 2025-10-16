@@ -34,18 +34,22 @@ const Login = () => {
     const login = useAuth((state) => state.login)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [error, setError] = useState("")
+    const [error, setError] = useState<string>("")      
 
-    const handleLogin = async (event: React.FormEvent) => {
+    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        try{
+        try {
             await login(email, password);
             console.log("Login successful");
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setError("Login failed");
+            }
         }
-        catch (error: any) {
-            setError(error.response?.data?.error || "Login failed");
-        }
-    }
+    };
+    
 
     return (
         <div className="w-full h-screen bg-black flex justify-center items-center bg-cover bg-center bg-[url('/background.png')] gap-10 overflow-hidden show-scroll-bar-when-short">
@@ -96,6 +100,7 @@ const Login = () => {
 
                 <button className="bg-[linear-gradient(to_bottom_right,theme(colors.yellow.300),theme(colors.orange.400),theme(colors.pink.500),theme(colors.fuchsia.700))] hover:brightness-110 hover:scale-[1.03] transition-all text-white px-6 py-3 rounded-md font-semibold shadow-[0_0_25px_rgba(255,100,80,0.4)] cursor-pointer w-full duration-400">
                     Login
+                    {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
                 </button>
 
                 <div className="flex items-center justify-center w-full my-4">
