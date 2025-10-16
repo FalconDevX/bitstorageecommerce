@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, useGLTF, useAnimations } from '@react-three/drei'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useAuth } from '@/api/useAuth.store'
 
 import Google from '@/public/social_icons/google-icon.png'
 import Github from '@/public/social_icons/github-icon.png'
@@ -20,7 +21,7 @@ function Model() {
         Object.values(actions).forEach((action) => {
             action?.reset().play()
             action?.setLoop(THREE.LoopRepeat, Infinity)
-            if (action) {
+            if (action) {   
                 action.timeScale = 0.1
             }
         })
@@ -30,6 +31,22 @@ function Model() {
 }
 
 const Login = () => {
+    const login = useAuth((state) => state.login)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
+
+    const handleLogin = async (event: React.FormEvent) => {
+        event.preventDefault();
+        try{
+            await login(email, password);
+            console.log("Login successful");
+        }
+        catch (error: any) {
+            setError(error.response?.data?.error || "Login failed");
+        }
+    }
+
     return (
         <div className="w-full h-screen bg-black flex justify-center items-center bg-cover bg-center bg-[url('/background.png')] gap-10 overflow-hidden show-scroll-bar-when-short">
             <div className="relative justify-center items-center w-[50%] h-full hidden lg:block hide-when-short">
@@ -53,18 +70,22 @@ const Login = () => {
                 </h1>
             </div>
 
-            <div className="min-w-[400px] h-[600px] my-40 flex flex-col justify-center items-start text-white px-10 py-20 bg-[#1A1D21] rounded-md shadow-[0_0_30px_rgba(255,255,255,0.1)] ">
+            <form onSubmit={handleLogin} className="min-w-[400px] h-[600px] my-40 flex flex-col justify-center items-start text-white px-10 py-20 bg-[#1A1D21] rounded-md shadow-[0_0_30px_rgba(255,255,255,0.1)] ">
                 <h1 className="text-3xl font-semibold mb-6">Welcome Back</h1>
 
                 <input
                     type="email"
                     placeholder="Email"
                     className="w-full mb-4 px-4 py-2 rounded-md bg-[#131313] border border-[#414141] focus:outline-none focus:ring-1 focus:ring-white/50 font-light"
+                    value={email}
+                    onChange={(event) =>setEmail(event.target.value)}
                 />
                 <input
                     type="password"
                     placeholder="Password"
                     className="w-full mb-4 px-4 py-2 rounded-md bg-[#131313] border border-[#414141] focus:outline-none focus:ring-1 focus:ring-white/50 font-light"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
                 />
                 <p className="w-full text-sm text-gray-400 text-center mb-4">
                     Nie pamiętasz hasła?{' '}
@@ -104,7 +125,7 @@ const Login = () => {
                         Zarejestruj się
                     </Link>
                 </p>
-            </div>
+            </form >
         </div>
     )
 }
