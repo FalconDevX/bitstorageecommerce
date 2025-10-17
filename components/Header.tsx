@@ -19,8 +19,8 @@ const Header = () => {
           <Image
             src="/renderx-logo.png"
             alt="BitStorage"
-            width={180}
-            height={180}
+            width={100}
+            height={100}
             className="rounded-md"
           />
         </div>
