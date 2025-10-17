@@ -45,7 +45,7 @@ const Header = () => {
               <p className="flex items-center justify-center gap-2 text-white px-4 py-2 hover:bg-white/10 cursor-pointer w-full text-center border-b border-gray-500" onClick={() => router.push('/login')}>
                 <LogIn className='w-5 h-5'/> Login
               </p>
-              <p className="flex items-center justify-center gap-2 text-white px-4 py-2 hover:bg-white/10 cursor-pointer w-full text-center">
+              <p className="flex items-center justify-center gap-2 text-white px-4 py-2 hover:bg-white/10 cursor-pointer w-full text-center" onClick={() => router.push('/register')}>
                 <EditIcon className='w-5 h-5 '/> Register
               </p>
             </div>
