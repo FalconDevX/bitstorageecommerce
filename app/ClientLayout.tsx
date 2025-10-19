@@ -1,18 +1,43 @@
 'use client'
 
-import { useEffect, useState } from "react";
-import { LoadingSpinner } from "@/components/Spinner";
+import { useEffect, useState } from "react"
+import { LoadingSpinner } from "@/components/Spinner"
+import { AnimatePresence, motion } from "framer-motion"
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const handleLoad = () => setIsLoading(false);
-    if (document.readyState === "complete") setIsLoading(false);
-    else window.addEventListener("load", handleLoad);
-    return () => window.removeEventListener("load", handleLoad);
-  }, []);
+    const handleLoad = () => setIsLoading(false)
+    if (document.readyState === "complete") setIsLoading(false)
+    else window.addEventListener("load", handleLoad)
+    return () => window.removeEventListener("load", handleLoad)
+  }, [])
 
-  if (isLoading) return <LoadingSpinner />;
-  return <>{children}</>;
+  return (
+    <>
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            key="spinner"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black"
+          >
+            <LoadingSpinner />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.div
+        key="content"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 0.6, delay: isLoading ? 0 : 0.2 }}
+      >
+        {children}
+      </motion.div>
+    </>
+  )
 }
