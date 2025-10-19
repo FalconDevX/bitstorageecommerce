@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 export const LoadingSpinner = () => (
-  <div className="fixed inset-0 flex items-center justify-center bg-transparent z-50">
+  <div className="fixed inset-0 flex items-center justify-center bg-transparent z-50 invert sepia saturate-[10000%] hue-rotate-[200deg]">
     <motion.div
       animate={{ rotate: 360 }}
       transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
