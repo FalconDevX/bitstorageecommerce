@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className="w-full sticky top-0 z-50 bg-[#16181C] backdrop-blur-md border-b border-white/10">
       <div className="w-full md:flex-start h-20 flex justify-between items-center px-12 sm:px-16 md:px-24">
-        <div className="w-1/3 hidden md:flex items-center gap-3 flex-shrink-0 transition-all duration-300">
+        <div className="w-1/3 hidden md:flex items-center gap-3 flex-shrink-0 transition-all duration-300 cursor-pointer" onClick={() => router.push('/')}>
           <Image
             src="/renderx-logo.png"
             alt="BitStorage"

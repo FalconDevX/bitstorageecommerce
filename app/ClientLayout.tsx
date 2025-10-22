@@ -1,18 +1,31 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import { LoadingSpinner } from "@/components/Spinner"
 import { AnimatePresence, motion } from "framer-motion"
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
+  const pathname = usePathname()
+
+  const isExcluded = pathname.startsWith('/auth')
 
   useEffect(() => {
+    if (isExcluded) {
+      setIsLoading(false)
+      return
+    }
+
     const handleLoad = () => setIsLoading(false)
     if (document.readyState === "complete") setIsLoading(false)
     else window.addEventListener("load", handleLoad)
     return () => window.removeEventListener("load", handleLoad)
-  }, [])
+  }, [isExcluded])
+
+  if (isExcluded) {
+    return <>{children}</>
+  }
 
   return (
     <>

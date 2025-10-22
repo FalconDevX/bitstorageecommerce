@@ -12,9 +12,8 @@ export const LoadingSpinner = () => (
       <Image
         src="/loading-fan.png"
         alt="Loading fan"
-        width={100}
-        height={100}
-        color="white"
+        width={110}
+        height={110}
         className="opacity-90"
       />
     </motion.div>
