@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../api/auth.api";
 import { useRouter } from "next/navigation";
+import { useProductStore } from "@/api/useProductStore";
 
 const Search = () => {
+  const setSelectedProductId = useProductStore((state) => state.setSelectedProductId);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const router = useRouter();
@@ -59,7 +61,9 @@ const Search = () => {
               {results.map((item: any) => (
                 <li
                   key={item.id}
-                  onClick={() => router.push(`/productdetails`)}
+                  onClick={() => {
+                    setSelectedProductId(item.id);
+                    router.push(`/productdetails`)}}
                   className="p-2 hover:bg-[#282C30] cursor-pointer"
                 >
                   {item.name} - {item.price} zł

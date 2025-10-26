@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import Image from "next/image";
+import {useProductStore} from "@/api/useProductStore"
+import {useState} from "react";
+import {API_URL} from "@/api/auth.api"
 
 const ProductDetails = () => {
+  const productId = useProductStore((state) => state.selectedProductId)
+  const [product, setProduct] = useState<any>(null)
+
+  useEffect(()=> {
+    if(!productId) return;
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(`${API_URL}/products/${productId}`);
+        const data = await res.json()
+        setProduct(data)
+      }
+      catch (err){
+        console.error(err);
+      }
+    }
+    fetchProduct()
+
+  }, [productId])
+
   return (
     <div className="flex flex-col min-h-screen bg-[#111318] text-white">
       <Header />
-
       <div className="flex flex-col md:flex-row justify-center items-center flex-grow gap-10 px-10 py-10">
-        {/* LEFT: Product Image */}
+        {/* Left: Product Image*/}
         <div className="flex flex-col items-center gap-4 w-full md:w-1/3">
           <div className="bg-[#1A1C22] rounded-lg p-4">
             <Image
@@ -30,7 +51,7 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        {/* RIGHT: Product Info */}
+        {/* Right product info */}
         <div className="flex flex-col w-full md:w-1/3 gap-4">
           <h1 className="text-3xl font-semibold">PlayStation 5</h1>
           <div className="flex items-center gap-2">
