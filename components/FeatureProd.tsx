@@ -4,6 +4,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { ChevronRightIcon, Star } from "lucide-react"
 import Search from "./Search"
+import Stars from "./Stars"
 
 const featureProducts = [
     {
@@ -85,39 +86,6 @@ const FeatureProd = () => {
             rating: 4.5,
         }
     ]
-
-    
-
-    const renderStars = (rating: number) => {
-        const rounded = Math.round(rating * 2) / 2
-        const stars = []
-
-        for (let i = 1; i <= 5; i++) {
-            if (rounded >= i) {
-                stars.push(
-                    <Star key={i} className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                )
-            } else if (rounded + 0.5 === i) {
-                stars.push(
-                    <div
-                        key={i}
-                        className="relative w-4 h-4"
-                    >
-                        <Star className="absolute inset-0 w-4 h-4 text-gray-400" />
-                        <div className="absolute inset-0 w-1/2 overflow-hidden">
-                            <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                        </div>
-                    </div>
-                )
-            } else {
-                stars.push(
-                    <Star key={i} className="w-4 h-4 text-gray-400" />
-                )
-            }
-        }
-
-        return stars
-    }
 
     const nextProduct = useCallback(() => {
         if (isSliding) return
@@ -247,8 +215,7 @@ const FeatureProd = () => {
                                         {product.price}
                                     </p>
                                     <div className="flex flex-row gap-1.5 translate-y-[1px]">
-                                        {renderStars(product.rating)}
-                                        <p className="text-gray-300 text-sm leading-none">{product.rating}</p>
+                                        <Stars rating={product.rating} />
                                     </div>
                                 </div>
                                 <button className="mt-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-2 rounded-md font-medium hover:scale-105 transition-transform cursor-pointer">

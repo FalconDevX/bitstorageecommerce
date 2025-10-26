@@ -1,9 +1,12 @@
+"use client";
+
 import React, { useEffect } from "react";
 import Header from "./Header";
 import Image from "next/image";
 import {useProductStore} from "@/api/useProductStore"
 import {useState} from "react";
 import {API_URL} from "@/api/auth.api"
+import Stars from "./Stars";
 
 const ProductDetails = () => {
   const productId = useProductStore((state) => state.selectedProductId)
@@ -53,22 +56,17 @@ const ProductDetails = () => {
 
         {/* Right product info */}
         <div className="flex flex-col w-full md:w-1/3 gap-4">
-          <h1 className="text-3xl font-semibold">PlayStation 5</h1>
+          <h1 className="text-3xl font-semibold">{product?.name}</h1>
           <div className="flex items-center gap-2">
-            <p className="text-orange-500 text-lg">★★★★☆</p>
-            <span className="text-gray-400">(4.5)</span>
+            <Stars rating={product?.rating} />
           </div>
           <p className="text-gray-400 text-sm leading-relaxed">
-            The PlayStation 5 takes gaming to the next level with ultra-HD
-            graphics, a powerful 825GB SSD, and ray tracing technology for
-            realistic visuals. Whether you're into high-action games or immersive
-            storytelling, the PS5 delivers fast loading times, seamless gameplay,
-            and stunning visuals.
+            {product?.description}
           </p>
 
           <div className="flex items-baseline gap-3 mt-2">
-            <span className="text-3xl font-bold">$499.99</span>
-            <span className="text-gray-500 line-through">$599.99</span>
+            <span className="text-3xl font-bold">{product?.price} zł</span>
+            {/* <span className="text-gray-500 line-through">$599.99</span> */}
           </div>
 
           <div className="flex flex-col gap-2 mt-4 text-sm">

@@ -4,7 +4,9 @@ import { useRouter } from "next/navigation";
 import { useProductStore } from "@/api/useProductStore";
 
 const Search = () => {
-  const setSelectedProductId = useProductStore((state) => state.setSelectedProductId);
+  const setSelectedProductId = useProductStore(
+    (state) => state.setSelectedProductId
+  );
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const router = useRouter();
@@ -22,9 +24,12 @@ const Search = () => {
     const controller = new AbortController();
     const delay = setTimeout(async () => {
       try {
-        const response = await fetch(`${API_URL}/products/?name=${query}`, {
-          signal: controller.signal,
-        });
+        const response = await fetch(
+          `${API_URL}/productsearch/?name=${query}`,
+          {
+            signal: controller.signal,
+          }
+        );
         if (!response.ok) throw new Error("Błąd zapytania");
         const data = await response.json();
         console.log(data);
@@ -63,7 +68,8 @@ const Search = () => {
                   key={item.id}
                   onClick={() => {
                     setSelectedProductId(item.id);
-                    router.push(`/productdetails`)}}
+                    router.push(`/productdetails`);
+                  }}
                   className="p-2 hover:bg-[#282C30] cursor-pointer"
                 >
                   {item.name} - {item.price} zł
