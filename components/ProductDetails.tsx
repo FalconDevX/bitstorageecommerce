@@ -35,13 +35,19 @@ const ProductDetails = () => {
         {/* Left: Product Image*/}
         <div className="flex flex-col items-center gap-4 w-full md:w-1/3">
           <div className="bg-[#1A1C22] rounded-lg p-4">
-            <Image
-              src="/ps5.png"
-              alt="PlayStation 5"
-              width={400}
-              height={400}
-              className="rounded-lg"
-            />
+            {product && product.image ? (
+              <Image
+                src={product?.image}
+                alt={product.name || "Product image"}
+                width={400}
+                height={400}
+                className="rounded-lg object-cover"
+              />
+            ) : (
+              <div className="w-[400px] h-[400px] bg-gray-800 flex items-center justify-center rounded-lg">
+                <span className="text-gray-500">No image</span>
+              </div>
+            )}
           </div>
           <div className="flex gap-2">
             <Image
