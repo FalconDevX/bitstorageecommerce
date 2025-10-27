@@ -4,12 +4,14 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { useAuth } from '@/api/useAuth.store'
 import Link from 'next/link'
+import {useRouter} from 'next/navigation'
 
 import Google from '@/public/social_icons/google-icon.png'
 import Github from '@/public/social_icons/github-icon.png'
 import Facebook from '@/public/social_icons/facebook-icon.png'
 
 const Login = () => {
+    const router = useRouter()
     const login = useAuth((state) => state.login)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -18,13 +20,14 @@ const Login = () => {
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            await login(email, password);
-            console.log("Login successful");
+            await login(email, password)
+            router.push('/')
+            console.log("Login successful")
         } catch (error: unknown) {
             if (error instanceof Error) {
-                setError(error.message);
+                setError(error.message)
             } else {
-                setError("Login failed");
+                setError("Login failed")
             }
         }
     };

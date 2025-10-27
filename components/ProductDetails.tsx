@@ -35,27 +35,12 @@ const ProductDetails = () => {
         {/* Left: Product Image*/}
         <div className="flex flex-col items-center gap-4 w-full md:w-1/3">
           <div className="bg-[#1A1C22] rounded-lg p-4">
-            {product && product.image ? (
-              <Image
-                src={product?.image}
-                alt={product.name || "Product image"}
-                width={400}
-                height={400}
-                className="rounded-lg object-cover"
-              />
-            ) : (
-              <div className="w-[400px] h-[400px] bg-gray-800 flex items-center justify-center rounded-lg">
-                <span className="text-gray-500">No image</span>
-              </div>
-            )}
-          </div>
-          <div className="flex gap-2">
             <Image
-              src="/ps5.png"
-              alt="PlayStation 5 Thumbnail"
-              width={80}
-              height={80}
-              className="rounded-lg opacity-70 hover:opacity-100 cursor-pointer"
+              src={product?.image || "/placeholder_graphiccard.png"}
+              alt={product?.name || "Product image"}
+              width={400}
+              height={400}
+              className="rounded-lg object-cover"
             />
           </div>
         </div>
@@ -82,10 +67,10 @@ const ProductDetails = () => {
           </div>
 
           <div className="flex gap-4 mt-6">
-            <button className="w-1/2 py-3 rounded-md bg-gray-700 hover:bg-gray-600 transition-colors">
+            <button className="w-1/2 py-3 rounded-md bg-gray-700 hover:bg-gray-600 transition-colors cursor-pointer">
               Add to Cart
             </button>
-            <button className="w-1/2 py-3 rounded-md bg-gradient-to-r from-orange-500 to-yellow-500 text-white hover:opacity-90 transition-opacity">
+            <button className="w-1/2 py-3 rounded-md bg-gradient-to-r from-orange-500 to-yellow-500 text-white hover:opacity-90 transition-opacity cursor-pointer">
               Buy Now
             </button>
           </div>

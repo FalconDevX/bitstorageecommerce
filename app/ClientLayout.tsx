@@ -4,12 +4,17 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { LoadingSpinner } from "@/components/Spinner"
 import { AnimatePresence, motion } from "framer-motion"
+import { useAuth } from "@/api/useAuth.store";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
   const pathname = usePathname()
 
   const isExcluded = pathname.startsWith('/auth')
+  const { refresh } = useAuth();
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
 
   useEffect(() => {
     if (isExcluded) {
