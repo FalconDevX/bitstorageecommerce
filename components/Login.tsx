@@ -31,7 +31,7 @@ const Login = () => {
             }
         }
     };
-
+    
     return (
         <form onSubmit={handleLogin} className="min-w-[400px] h-[600px] my-40 flex flex-col justify-center items-start text-white px-10 py-20 bg-[#1A1D21] rounded-md shadow-[0_0_30px_rgba(255,255,255,0.1)] ">
             <h1 className="text-3xl font-semibold mb-6">Welcome Back</h1>
