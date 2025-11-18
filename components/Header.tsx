@@ -22,7 +22,7 @@ const Header = () => {
     <header className="w-full sticky top-0 z-50 bg-[#16181C] backdrop-blur-md border-b border-white/10">
       <div className="w-full md:flex-start h-20 flex justify-between items-center px-12 sm:px-16 md:px-24">
         <div
-          className="w-1/3 hidden md:flex items-center gap-3 flex-shrink-0 transition-all duration-300 cursor-pointer"
+          className="w-1/3 hidden md:flex items-center gap-3 flex-shrink-0 transition-all duration-300"
           onClick={() => router.push("/")}
         >
           <Image
@@ -30,7 +30,7 @@ const Header = () => {
             alt="BitStorage"
             width={100}
             height={100}
-            className="rounded-md"
+            className="rounded-md cursor-pointer"
           />
         </div>
 
@@ -42,10 +42,10 @@ const Header = () => {
             Home
           </Link>
           <Link
-            href="/shop"
+            href="/products"
             className="hover:text-white transition-colors duration-300"
           >
-            Shop
+            Products
           </Link>
           <Link
             href="/aboutus"

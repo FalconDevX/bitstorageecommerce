@@ -8,7 +8,7 @@ const api = axios.create({
     withCredentials: true
 });
 
-// Dodaj token do każdego żądania
+//adding token to every request
 api.interceptors.request.use((config) => {
     const token = useAuth.getState().accessToken;
     if (token) {
@@ -17,7 +17,6 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
-// Queue dla requestów czekających na refresh
 let isRefreshing = false;
 let failedQueue: Array<{
     resolve: (value?: any) => void;

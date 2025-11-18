@@ -72,7 +72,8 @@ const Search = () => {
                   }}
                   className="p-2 hover:bg-[#282C30] cursor-pointer"
                 >
-                  {item.name} - {item.price} zł
+                  <span>{item.name}</span>{" "}
+                  <span className="text-sm text-gray-400 ml-1">{item.price} zł</span>
                 </li>
               ))}
             </ul>

@@ -12,6 +12,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "BitStorage",
   description: "BitStorage",
+  icons: {
+    icon: "/renderx-logo.png",
+  },
 };
 
 export default function RootLayout({

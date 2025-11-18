@@ -30,7 +30,7 @@ const Stars: React.FC<StarsProps> = ({ rating, maxRating = 5, size = 20 }) => {
         );
       })}
       <span className="text-gray-400 text-sm ml-1">
-        ({(rating ?? 0).toFixed(1)})
+        {(rating ?? 0).toFixed(1)}
       </span>
     </div>
   );
